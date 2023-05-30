@@ -40,14 +40,15 @@ class CcsManager:
                 print("終了するにはCtrl+C")
 
     def check_fileformat(self):
-        """Not implemented
+        """Confirm file format
+
+        Raises:
+            Exception: wrong format
         """
-        notes = self.root.find("Sequence").find("Scene").find("Units").find("Unit").find("Song").find("Score").findall("Note")
-        if notes:
-            # なんとかしてくれ
-            pass
-            # input("ファイルフォーマットがよくないみたいです。")
-            # exit()
+
+        groups = self.get_groups()
+        if not len(groups):
+            raise Exception("Wrong format")
     def find_unit(self) -> list[ET.Element]:
         unit = [unit for unit in self.root.find("Sequence").find("Scene").find("Units").findall("Unit") if unit.attrib["Group"] == self.trackid]
 
